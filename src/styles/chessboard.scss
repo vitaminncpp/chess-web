@@ -1,5 +1,41 @@
+
 .chessboard {
-    margin: 0;
-    padding:0;
-    background:red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 7px;
+    padding: 5px;
+
+    #flip {
+        height: 50px;
+        width: 150px;
+        margin-bottom: 50px;
+        background: #ffffff;
+        border: solid 1px #000;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    table.grid {
+        -webkit-border-vertical-spacing: 0;
+        -webkit-border-horizontal-spacing: 0;
+
+        tr {
+            td {
+                height: 80px;
+                width: 80px;
+            }
+
+            .light-tile {
+                background: #f0d9b5;
+            }
+
+            .dark-tile {
+                background-color: #b58863;
+            }
+        }
+
+    }
+
 }

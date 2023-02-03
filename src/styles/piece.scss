@@ -1,0 +1,12 @@
+.piece {
+    height: 80px;
+    width: 80px;
+
+    &:hover {
+        cursor: grab;
+    }
+
+    &:active {
+        cursor: grabbing;
+    }
+}
