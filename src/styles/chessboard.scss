@@ -1,5 +1,6 @@
 
 .chessboard {
+
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -18,8 +19,9 @@
     }
 
     table.grid {
-        -webkit-border-vertical-spacing: 0;
-        -webkit-border-horizontal-spacing: 0;
+        -webkit-border-vertical-spacing: 0px;
+        -webkit-border-horizontal-spacing: 0px;
+
 
         tr {
             td {
@@ -38,4 +40,8 @@
 
     }
 
+}
+
+.highlight {
+    border: solid 2px #f00;
 }
