@@ -53,44 +53,44 @@ export default class Chessboard extends Component {
 //😇
     public render() {
         return (
-                <div className="chessboard">
-                    <div className="controls">
-                        <button id="flip" onClick={this.flipBoard}>Flip the fucking board</button>
-                    </div>
-                    <table className="grid">
-                        <tbody>
-                        {
-                            ((this.player && !this.flip) || (!this.player && this.flip)) ? (this.board.map((row, i) => {
-                                return <tr key={i}>
-                                    {row.map((item, j) => {
-                                        return <td key={j} className={(i + j) % 2 == 1 ? 'dark-tile' : 'light-tile'}
-                                                   id={`${i}-${j}`}
-                                        >
-                                            <ChessPiece player={item.color} piece={item.piece} i={i} j={j}
-                                                        handleDragEnd={this.onDragEnd}
-                                            />
-                                        </td>;
-                                    })
-                                    }
-                                </tr>;
-                            })) : (this.board.map((row, i) => {
-                                return <tr key={i}>
-                                    {row.map((item, j) => {
-                                        return <td key={j} className={(i + j) % 2 == 1 ? 'dark-tile' : 'light-tile'}>
-                                            <ChessPiece player={item.color} piece={item.piece} i={i} j={j}
-                                                        handleDragEnd={this.onDragEnd}/>
-                                        </td>;
-                                    }).reverse()
-                                    }
-                                </tr>;
-                            }).reverse())
-                        }
-                        </tbody>
-                    </table>
-                    <div className="test">
-                        {this.state.count}
-                    </div>
+            <div className="chessboard">
+                <div className="controls">
+                    <button id="flip" onClick={this.flipBoard}>Flip the fucking board</button>
                 </div>
+                <table className="grid">
+                    <tbody>
+                    {
+                        ((this.player && !this.flip) || (!this.player && this.flip)) ? (this.board.map((row, i) => {
+                            return <tr key={i}>
+                                {row.map((item, j) => {
+                                    return <td key={j} className={(i + j) % 2 == 1 ? 'dark-tile' : 'light-tile'}
+                                               id={`${i}-${j}`}
+                                    >
+                                        <ChessPiece player={item.color} piece={item.piece} i={i} j={j}
+                                                    handleDragEnd={this.onDragEnd}
+                                        />
+                                    </td>;
+                                })
+                                }
+                            </tr>;
+                        })) : (this.board.map((row, i) => {
+                            return <tr key={i}>
+                                {row.map((item, j) => {
+                                    return <td key={j} className={(i + j) % 2 == 1 ? 'dark-tile' : 'light-tile'}>
+                                        <ChessPiece player={item.color} piece={item.piece} i={i} j={j}
+                                                    handleDragEnd={this.onDragEnd}/>
+                                    </td>;
+                                }).reverse()
+                                }
+                            </tr>;
+                        }).reverse())
+                    }
+                    </tbody>
+                </table>
+                <div className="test">
+                    {this.state.count}
+                </div>
+            </div>
         );
     }
 

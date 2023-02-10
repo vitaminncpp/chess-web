@@ -1,4 +1,5 @@
-import {PieceRep} from "./Piece";
+import {PieceRep, pieceValue} from "./Piece";
+
 
 //@formatter:off
 export const initialPosition: Array<Array<PieceRep>> = [

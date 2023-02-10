@@ -36,5 +36,8 @@ export const ChessPiece: FC<{
                     backgroundPosition: 'center',
                 }}
                 draggable={true}
+                onMouseDown={(e)=>{
+
+                }}
             ></div>) : (<div className="piece"></div>));
 }
