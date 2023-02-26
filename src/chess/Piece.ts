@@ -1,4 +1,5 @@
 import {Player} from "./Player";
+import {Tile} from "./Chessboard";
 
 export abstract class Piece {
     protected x: number;
@@ -13,6 +14,7 @@ export abstract class Piece {
     protected attackMap: boolean[][] = [];
     protected moved: boolean = false;
     protected alive: boolean = false;
+    protected board: Array<Array<Tile>>;
 
     constructor(x: number, y: number, player: Player, index: number) {
         this.player = player;
@@ -20,6 +22,7 @@ export abstract class Piece {
         this.y = y;
         this.color = player.getColor();
         this.index = index;
+        this.board = player.getBoard();
     }
 
     public resetMoveMap() {
@@ -88,12 +91,34 @@ export class Pawn extends Piece {
     }
 
     public updateMoveMap() {
+        this.resetMoveMap();
+
+    }
+
+    public testMoveMap(x: number, y: number): boolean {
+        const pX: number = this.x;
+        const pY: number = this.y;
+
+        //@ts-ignore
+        const temp: Piece = this.board[x][y].getPiece();
+        //@ts-ignore
+        this.board[x][y].setPiece(this);
+        this.board[this.x][this.y].setPiece(null);
+        this.x = x;
+        this.y = y;
+
+        if (temp) {
+            temp.capture();
+        }
+
+        this.player.getOpponent().updateAttackMap();
 
     }
 }
 
 export class Knight extends Piece {
     updateMoveMap(): void {
+
     }
 
 }
