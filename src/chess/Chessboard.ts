@@ -1,4 +1,4 @@
-import {Piece} from "./Piece";
+import {Piece, PieceRep} from "./Piece";
 
 export class Tile {
     private piece: Piece | null;
@@ -19,7 +19,7 @@ export class Tile {
 export class Chessboard {
     board: Tile[][];
 
-    constructor() {
+    constructor(props: { board: PieceRep[][] }) {
         this.board = new Array<Array<Tile>>();
         for (let i = 0; i < 8; i++) {
             this.board.push(new Array<Tile>);

@@ -1,5 +1,7 @@
 import {Player} from "./Player";
 import {Tile} from "./Chessboard";
+import {ChessState, Move} from "./Chess";
+import {Chess} from "../components/Chess";
 
 export abstract class Piece {
     protected x: number;
@@ -78,8 +80,38 @@ export abstract class Piece {
         return this.alive;
     }
 
-    public moveTo(x: number, y: number) {
+    public moveTo(x: number, y: number): Move {
         //TODO Move to specified position
+        const move = new Move();
+        move.setSource(this.x, this.y);
+        move.setDestination(x, y);
+
+        if (this.moveMap[x][y]) {
+            //@ts-ignore
+            if (this.board[x][y].getPiece() != null) {
+                move.setState(ChessState.CAPTURE_MOVE);
+                //@ts-ignore
+                this.player.capture(this.board[x][y].getPiece());
+            }
+        }
+        return move;
+    }
+
+    public testMoveMap(x: number, y: number): boolean {
+        return false;
+    }
+
+    public reset() {
+        this.resetMoveMap();
+        this.resetAttackMap();
+    }
+
+    public getX(): number {
+        return this.x;
+    }
+
+    public getY(): number {
+        return this.y;
     }
 }
 
@@ -112,7 +144,7 @@ export class Pawn extends Piece {
         }
 
         this.player.getOpponent().updateAttackMap();
-
+        return false;
     }
 }
 

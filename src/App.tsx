@@ -6,6 +6,7 @@ import Chessboard from "./components/Chessboard";
 const App: FC<{}> = (props: {}) => {
     return (
         <div className="App">
+            <Navbar />
             <Chessboard/>
         </div>
     );

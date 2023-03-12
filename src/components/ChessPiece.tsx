@@ -20,14 +20,12 @@ const pieces = [[bp, bn, bb, br, bq, bk],
 
 export const ChessPiece: FC<{
     player: boolean, piece: number, i: number, j: number,
-    handleDragEnd: (e: React.DragEvent) => void,
-
+    handleMouseDown: (i: number, j: number) => void,
 }> = (props) => {
 
     return (
         props.piece != -1 ? (
             <div
-
                 id={`${props.i}-${props.j}`}
                 className="piece"
                 style={{
@@ -35,9 +33,9 @@ export const ChessPiece: FC<{
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                 }}
-                draggable={true}
-                onMouseDown={(e)=>{
 
+                onMouseDown={(e) => {
+                    props.handleMouseDown(props.i, props.j);
                 }}
             ></div>) : (<div className="piece"></div>));
 }

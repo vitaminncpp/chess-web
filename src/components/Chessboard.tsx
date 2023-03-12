@@ -3,8 +3,6 @@ import "../styles/chessboard.scss";
 import {ChessPiece} from "./ChessPiece";
 import {PieceRep} from "../chess/Piece";
 import {initialPosition} from "../chess/Chess";
-import {DndProvider} from 'react-dnd';
-import {HTML5Backend} from 'react-dnd-html5-backend';
 import $ from 'jquery';
 import 'jqueryui';
 
@@ -31,25 +29,6 @@ export default class Chessboard extends Component {
         console.log(this.state);
     }
 
-
-    public onDragStart(e: React.DragEvent): void {
-        let target: HTMLElement = e.target as HTMLElement;
-    }
-
-    public onDragEnter(e: React.DragEvent): void {
-        let target: HTMLElement = e.target as HTMLElement;
-        target.classList.add('highlight');
-    }
-
-    public onDragEnd(e: React.DragEvent): void {
-        let target: HTMLElement = e.target as HTMLElement;
-    }
-
-    public onDragExit(e: React.DragEvent): void {
-        let target: HTMLElement = e.target as HTMLElement;
-        target.classList.remove('highlight');
-    }
-
 //😇
     public render() {
         return (
@@ -57,7 +36,7 @@ export default class Chessboard extends Component {
                 <div className="controls">
                     <button id="flip" onClick={this.flipBoard}>Flip the fucking board</button>
                 </div>
-                <table className="grid">
+                <table className="grid" id="chessgrid">
                     <tbody>
                     {
                         ((this.player && !this.flip) || (!this.player && this.flip)) ? (this.board.map((row, i) => {
@@ -67,7 +46,7 @@ export default class Chessboard extends Component {
                                                id={`${i}-${j}`}
                                     >
                                         <ChessPiece player={item.color} piece={item.piece} i={i} j={j}
-                                                    handleDragEnd={this.onDragEnd}
+                                                    handleMouseDown={this.handleMouseDown}
                                         />
                                     </td>;
                                 })
@@ -78,7 +57,8 @@ export default class Chessboard extends Component {
                                 {row.map((item, j) => {
                                     return <td key={j} className={(i + j) % 2 == 1 ? 'dark-tile' : 'light-tile'}>
                                         <ChessPiece player={item.color} piece={item.piece} i={i} j={j}
-                                                    handleDragEnd={this.onDragEnd}/>
+                                                    handleMouseDown={this.handleMouseDown}
+                                        />
                                     </td>;
                                 }).reverse()
                                 }
@@ -102,27 +82,24 @@ export default class Chessboard extends Component {
         this.update();
     }
 
-    public update() {
-        $('table.grid td').on('dragenter', (e: Event) => {
-            let target: HTMLElement = e.target as HTMLElement;
-            target.classList.add('highlight');
-        });
-        $('table.grid td').on('dragleave', (e: Event) => {
-            let target: HTMLElement = e.target as HTMLElement;
-            target.classList.remove('highlight');
-        });
-        $('.piece').on('dragend', (e: Event) => {
-            let target: HTMLElement = e.target as HTMLElement;
-        });
-        $('.piece').draggable({});
-        $('.grid td').droppable({
-            drop: (e, ui) => {
-                e.target.innerHTML = '';
-                e.target.appendChild(ui.draggable[0]);
-                ui.draggable.css({top: '0px', left: '0px'});
-            }
-        })
+    public handleMouseDown(i: number, j: number): void {
 
-        console.log("Hello");
+    }
+
+    public update() {
+        $('.piece').draggable({
+            containment: "table.grid#chessgrid",  // constraints the drag to the chessboard only
+            // snap:'table.grid#chessgrid td'
+            revert: true
+        });
+
+        // $('table.grid td').droppable({
+        //     drop: (e, ui) => {
+        //         e.target.innerHTML = '';
+        //         e.target.appendChild(ui.draggable[0]);
+        //         ui.draggable.css({top: '0px', left: '0px',});
+        //     }
+        // });
+
     }
 }

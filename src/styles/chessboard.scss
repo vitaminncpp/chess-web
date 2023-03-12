@@ -36,12 +36,13 @@
             .dark-tile {
                 background-color: #b58863;
             }
+
+            .highlight {
+                border: solid 2px #f00;
+            }
         }
 
     }
 
 }
 
-.highlight {
-    border: solid 2px #f00;
-}
